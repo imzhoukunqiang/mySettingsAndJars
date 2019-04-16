@@ -36,16 +36,16 @@ return
 
 NumpadAdd::return
 
-NumpadAdd & Z:: press(1)
-NumpadAdd & X:: press(2)
-NumpadAdd & C:: press(3)
-NumpadAdd & A:: press(4)
-NumpadAdd & S:: press(5)
-NumpadAdd & D:: press(6)
-NumpadAdd & Q:: press(7)
-NumpadAdd & W:: press(8)
-NumpadAdd & E:: press(9)
-NumpadAdd & Space:: press(0)
+~CapsLock & m:: press(1)
+~CapsLock & ,:: press(2)
+~CapsLock & .:: press(3)
+~CapsLock & j:: press(4)
+~CapsLock & k:: press(5)
+~CapsLock & l:: press(6)
+~CapsLock & u:: press(7)
+~CapsLock & i:: press(8)
+~CapsLock & o:: press(9)
+~CapsLock & Space:: press(0)
 
 NumpadAdd & P:: press_blind("Up")
 NumpadAdd & sc027:: press_blind("Down")    ;027->;
