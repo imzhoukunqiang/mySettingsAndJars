@@ -10,10 +10,10 @@ global keyPressed := False
 ; /rq  -> yyyy-MM-dd 
 ; /time  -> HH:mm:ss
 
-; AppsKey +  Q W E -> 7 8 9
-; AppsKey +   A S D -> 4 5 6
-; AppsKey +    Z X C -> 1 2 3
-; AppsKey +       space ->0
+; RAlt +  Q W E -> 7 8 9
+; RAlt +   A S D -> 4 5 6
+; RAlt +    Z X C -> 1 2 3
+; RAlt +       space ->0
 
 ; CapsLock +   I   ->    ↑ 
 ; CapsLock + J K L -> ←  ↓  →
@@ -24,21 +24,33 @@ global keyPressed := False
 ;  增强复制 ctrl+shift+c ：选中文件即可复制路径
 
 
-~AppsKey & Z:: press(1)
-~AppsKey & X:: press(2)
-~AppsKey & C:: press(3)
-~AppsKey & A:: press(4)
-~AppsKey & S:: press(5)
-~AppsKey & D:: press(6)
-~AppsKey & Q:: press(7)
-~AppsKey & W:: press(8)
-~AppsKey & E:: press(9)
-~AppsKey & Space:: press(0)
+intInterval := 300 ; 若两次连击在这个时间间隔中，则视为双击。
+$CapsLock::
+if (A_PriorHotkey <> "$CapsLock" or A_TimeSincePriorHotkey > intInterval)
+{
+    KeyWait, CapsLock
+    return
+}
+Send, {CapsLock}
+return
 
-~CapsLock & I:: press_blind("Up")
-~CapsLock & K:: press_blind("Down")
-~CapsLock & J:: press_blind("Left")
-~CapsLock & L:: press_blind("Right")
+NumpadAdd::return
+
+NumpadAdd & Z:: press(1)
+NumpadAdd & X:: press(2)
+NumpadAdd & C:: press(3)
+NumpadAdd & A:: press(4)
+NumpadAdd & S:: press(5)
+NumpadAdd & D:: press(6)
+NumpadAdd & Q:: press(7)
+NumpadAdd & W:: press(8)
+NumpadAdd & E:: press(9)
+NumpadAdd & Space:: press(0)
+
+NumpadAdd & P:: press_blind("Up")
+NumpadAdd & sc027:: press_blind("Down")    ;027->;
+NumpadAdd & L:: press_blind("Left")
+NumpadAdd & sc028:: press_blind("Right")   ;028->'
 
 ~CapsLock & R:: press_blind("Backspace")
 ~CapsLock & Q:: press_blind("Insert")
@@ -49,21 +61,13 @@ global keyPressed := False
 ~CapsLock & D:: press_blind("PgDn")
 
 
-$Capslock::
-    keyPressed:=False
-    KeyWait, CapsLock
-    If (!keyPressed){
-        Send, {CapsLock}
-    }
-Return
-
-$AppsKey::
-    keyPressed:=False
-    KeyWait, AppsKey
-    If (!keyPressed){
-   	    Send, {AppsKey}
-    }
-Return
+; $Capslock::
+;     keyPressed:=False
+;     KeyWait, CapsLock
+;     If (!keyPressed){
+;         Send, {CapsLock}
+;     }
+; Return
 
 
 ;CapsLock 
@@ -130,7 +134,7 @@ RemoveToolTip:
 ToolTip
 return
 
-;;
+;
 
 
 format_now(format_str){
